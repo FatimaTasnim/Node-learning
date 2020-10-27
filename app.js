@@ -28,6 +28,26 @@ yargs.command({
     }
 })
 
+yargs.command({
+    command: 'remove',
+    describe: 'remove a specific note',
+
+    builder: {
+        title: {
+            describe: "Remove any note you like",
+            demandOption: false,
+            type: "string"
+        }
+    },
+    
+    handler: function (argv) {
+        notes.removeNote(argv.title);
+    }
+})
 // need to call yargs to function yargs command. any type of yargs call will do
 // but for specification can call following
 yargs.parse();
+
+
+// console.log(yargs.argv.title); // only printing title object
+// console.log(yargs.argv);

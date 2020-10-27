@@ -26,6 +26,25 @@ const addNotes = function (title, body) {
     saveNotes(notes);
 }
 
+const removeNote = function (title) {
+    
+    const notes = loadNotes();
+    let flag = false;
+
+    const findme = notes.filter(function (note) {      
+        if(note.title === title){
+            notes.pop(note);
+            flag = true;
+            console.log(chalk.green.inverse(("Note deleted sucessfully!")));
+        }
+
+    })
+
+    if(!flag){
+        console.log(chalk.red.inverse("no note found"));
+    }
+    else saveNotes(notes);
+}
 
 // saving the notes in json format
 const saveNotes= function (notes) {
@@ -49,4 +68,7 @@ const loadNotes = function () {
 module.exports = {
     getNotes: getNotes,
     addNotes: addNotes,
+    removeNote: removeNote
+    // saveNotes: saveNotes,
+    // loadNotes: loadNotes
 }
