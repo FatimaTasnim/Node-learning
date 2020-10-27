@@ -1,0 +1,16 @@
+{
+  "name": "weight",
+  "version": "1.0.0",
+  "description": "Weight loss app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tasnim",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "validator": "^13.1.17",
+    "yargs": "^16.1.0"
+  }
+}
