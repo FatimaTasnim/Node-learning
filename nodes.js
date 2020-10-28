@@ -70,12 +70,23 @@ const listNotes = () =>{
     console.log(chalk.blueBright("Available Notes are..."));
     notes.forEach(note => console.log(note.title));
 }
+
+const readNotes = (title) =>{
+    const notes = loadNotes();
+    const note = notes.find(note=> note.title===title);
+    if(!note)console.log(chalk.red('No note found!'));
+    else{
+        console.log(chalk.green(note.title));
+        console.log(note.body);
+    }
+}
 // only exporting addNotes and getNotes as other modules are helper for addNotes.
 module.exports = {
     getNotes: getNotes,
     addNotes: addNotes,
     removeNote: removeNote,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNotes: readNotes
     // saveNotes: saveNotes,
     // loadNotes: loadNotes
 }

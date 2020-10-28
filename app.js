@@ -58,8 +58,26 @@ yargs.command({
             type: "string"
         }
     },
-    handler(argv) {
+    handler() {
         notes.listNotes();
+
+    }
+})
+
+yargs.command({
+    command: 'read',
+    describe: 'List all the existing notes',
+    // additional command input taking while building
+    // add additional title in command like node app.js add --title= "say hi!"
+    builder: {
+        title: {
+            describe: "Show lists!",
+            demandOption: false,  // this additional inputs are not mandatory when the demandOption is false
+            type: "string"
+        }
+    },
+    handler(argv) {
+        notes.readNotes(argv.title);
 
     }
 })
