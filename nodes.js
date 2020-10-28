@@ -10,8 +10,11 @@ const addNotes = (title, body)=> {
     const notes = loadNotes();
    
     // filter the duplicate items
-    const duplicates = notes.filter(note => note.title === title);
-
+    //const duplicates = notes.filter(note => note.title === title);
+    // filter go through the whole list
+    // we only need to find if there is any duplicate
+    // use find instead of filter cause it will return when the first occurance detected
+    const duplicates = notes.find(note=> note.title === title);
     console.log("duplicates ", duplicates);
 
     if(duplicates.length===0){
