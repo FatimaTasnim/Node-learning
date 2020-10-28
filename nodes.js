@@ -62,11 +62,17 @@ const loadNotes = ()=>{
     
 }
 
+const listNotes = () =>{
+    const notes = loadNotes();
+    console.log(chalk.blueBright("Available Notes are..."));
+    notes.forEach(note => console.log(note.title));
+}
 // only exporting addNotes and getNotes as other modules are helper for addNotes.
 module.exports = {
     getNotes: getNotes,
     addNotes: addNotes,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
     // saveNotes: saveNotes,
     // loadNotes: loadNotes
 }
