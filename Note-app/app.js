@@ -7,7 +7,7 @@ const notes = require('./nodes.js');
 console.log(chalk.green("Success!"));
 const msg = process.argv[2];
 console.log(msg);
-
+debugger
 // writing customized commands
 // add command 
 yargs.command({
