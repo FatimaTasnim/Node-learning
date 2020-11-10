@@ -11,10 +11,10 @@ const geoCoding = (location, callback)=>{
     
      request({url:map_url, json:true}, (error, response)=>{
         if(error){
-            console.log("Unable to connect to the network");
+            //console.log("Unable to connect to the network");
            callback("Please check your internet connection!", center)
         }else if(!response.body.features){
-            console.log("No result found for searched location");
+            //console.log("No result found for searched location");
             callback("Please enter a valid location", center);
         }else{
             center = response.body.features[0].center
