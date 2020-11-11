@@ -1,25 +1,30 @@
 const request = require('request')
 
-const base_url = 'http://api.weatherstack.com/current?'
-const access_key = 'access_key=f2762e67e421f1edb6a0ec60ec61ba1d'
-const query = '&query='
+const url_data = {
+    base_url: 'http://api.weatherstack.com/current?',
+    access_key: 'access_key=f2762e67e421f1edb6a0ec60ec61ba1d',
+    query: '&query='
+}
 
-const forecast = (center, callback)=>{
-    console.log("latitude & longitude of ", center.place, ": ", center.latitude, ", ", center.longitude);
-        const url = base_url + access_key + query + center.latitude + ',' + center.longitude;
+
+const forecast = ({place, latitude, longitude}, callback)=>{
+    console.log("latitude & longitude of ", place, ": ", latitude, ", ", longitude);
+        const {base_url, access_key, query} = url_data;
+
+        const url = base_url + access_key + query + latitude + ',' + longitude;
         const data = {
             temperature: undefined,
             precip: undefined
         }
-        request({url:url, json:true}, (error, response)=>{
+        request({url:url, json:true}, (error, {body})=>{ // taking only body object from response uding destructor
 
                 if(error){
                     callback("Unable to connect to the network", undefined)
-                }else if(response.body.error){
+                }else if(body.error){
                     callback("Unable to find Location")
                 }else{
-                    data.temperature =  response.body.current.temperature,
-                    data.precip =  response.body.current.precip
+                    data.temperature =  body.current.temperature,
+                    data.precip =  body.current.precip
                     callback(undefined, data)
                 }
         })

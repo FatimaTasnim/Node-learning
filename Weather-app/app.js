@@ -17,12 +17,12 @@ else{
         if(error){
             console.log(error)
         }else{
-         forecast(geoData, (error, data)=>{
+         forecast(geoData, (error, {temperature, precip})=>{// instead of data object destructuring it's property
              if(error){
                  console.log(error)
              }else{
-                 const update = "it is currently " + data.temperature + " degrees out. There is a " 
-                              + data.precip+'% chance of rain.';
+                 const update = "it is currently " + temperature + " degrees out. There is a " 
+                              + precip+'% chance of rain.';
                  console.log(update)
              }
          })
