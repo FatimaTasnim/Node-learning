@@ -3,13 +3,18 @@
 <html>
 
 <head>
-
+    <title>Help</title>
+    <link rel="icon" href="/img/weather.png">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
-    {{>header}}
-    <!-- rendering partials -->
-    <h1>{{text}}</h1>
+    <div class="main-content">
+        {{>header}}
+        <p>{{helpText}}</p>
+    </div>
+    
+    {{>footer}}
 </body>
 
 </html>
