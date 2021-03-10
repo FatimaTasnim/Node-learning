@@ -5,6 +5,10 @@ const { runInNewContext } = require('vm')
 
 const app = express()
 
+const request = require('request');
+const geoCoding = require('../utils/geocode')
+const forecast = require('../utils/forecast')
+
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
@@ -46,10 +50,28 @@ app.get('/weather', (req, res) => {
             error: "You need to provide an search adress"
         })
     }
-    res.send({
-        forecast: 'It is snowing',
-        location: req.query.address
-    })
+
+    geoCoding(req.query.address, (error, geoData)=>{
+        if(error){
+            console.log(error)
+        }else{
+         forecast(geoData, (error, {temperature, precip})=>{// instead of data object destructuring it's property
+             if(error){
+                res.send({
+                    error: error
+                })
+             }else{
+                 const update = "it is currently " + temperature + " degrees out. There is a " 
+                              + precip+'% chance of rain.';
+                 res.send({
+                        forecast: update,
+                        location: req.query.address
+                 })
+             }
+         })
+        }
+     })
+    
 })
 
 app.get('/help/*', (req, res) => {
