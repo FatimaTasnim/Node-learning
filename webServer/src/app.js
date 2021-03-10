@@ -1,49 +1,65 @@
 const path = require('path')
-const { response } = require('express')
 const express = require('express')
 const hbs = require('hbs')
+const { runInNewContext } = require('vm')
 
-const app = express() // loading express app
+const app = express()
 
-// serving folders for express
-const assetsPaths = path.join(__dirname, '../public')
+// Define paths for Express config
+const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
-const partialPath = path.join(__dirname, '../templates/partials')
-// static directory to serve
-app.use(express.static(assetsPaths));
+const partialsPath = path.join(__dirname, '../templates/partials')
 
+// Setup handlebars engine and views location
+app.set('view engine', 'hbs')
+app.set('views', viewsPath)
+hbs.registerPartials(partialsPath)
 
-// setting the template
-app.set('view engine', 'hbs'); // 'view engine' format should be exact same
-app.set('views', viewsPath); // for views the default folder name is views, so if the folder name is smth other than views it should be added like this.
-hbs.registerPartial('header',partialPath); 
+// Setup static directory to serve
+app.use(express.static(publicDirectoryPath))
 
-/// check (express.org->api reference-> express application -> app.set() to explore more set options.
-
-
-app.get('', (req, res)=>{
+app.get('', (req, res) => {
     res.render('index', {
-        title: 'Weather app'  
+        title: 'Weather',
+        name: 'Tasnim'
     })
 })
 
-app.get('/about', (req, res)=>{
-    res.render('about')
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About Me',
+        name: 'Tasnim'
+    })
 })
 
-app.get('/help', (req, res)=>{
+app.get('/help', (req, res) => {
     res.render('help', {
-        text: "hey! how can I help you???"
+        helpText: 'This is some helpful text.',
+        title: 'Help',
+        name: 'Tasnim'
     })
 })
 
-
-
-
-app.get('/weather', (req, res)=>{
-    res.send("weather view!");
+app.get('/weather', (req, res) => {
+  
 })
 
-app.listen(3000, ()=>{
-    console.log("Server is up")
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Andrew Mead',
+        errorMessage: 'Help article not found.'
+    })
+})
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Andrew Mead',
+        errorMessage: 'Page not found.'
+    })
+})
+
+app.listen(3000, () => {
+    console.log('Server is up on port 3000.')
 })

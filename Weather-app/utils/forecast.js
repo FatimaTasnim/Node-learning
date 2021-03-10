@@ -21,7 +21,7 @@ const forecast = ({place, latitude, longitude}, callback)=>{
                 if(error){
                     callback("Unable to connect to the network", undefined)
                 }else if(body.error){
-                    callback("Unable to find Location")
+                    callback("Unable to find Location", undefined)
                 }else{
                     data.temperature =  body.current.temperature,
                     data.precip =  body.current.precip

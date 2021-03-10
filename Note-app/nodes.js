@@ -80,6 +80,7 @@ const readNotes = (title) =>{
         console.log(note.body);
     }
 }
+
 // only exporting addNotes and getNotes as other modules are helper for addNotes.
 module.exports = {
     getNotes: getNotes,
