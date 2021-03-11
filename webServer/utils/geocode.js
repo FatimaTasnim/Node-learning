@@ -12,9 +12,9 @@ const geoCoding = (location, callback)=>{
         if(error){
             //console.log("Unable to connect to the network");
            callback("Please check your internet connection!", center)
-        }else if(!body.features[0]){
+        }else if(!body.features || !body.features[0]){
             //console.log("No result found for searched location");
-            callback("Please enter a valid location", center);
+            callback("Please enter a valid location!", center);
         }else{
             center = body.features[0].center
             center = {
