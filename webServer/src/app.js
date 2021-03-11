@@ -8,6 +8,7 @@ const app = express()
 const request = require('request');
 const geoCoding = require('../utils/geocode')
 const forecast = require('../utils/forecast')
+const e = require('express')
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public')
@@ -50,10 +51,17 @@ app.get('/weather', (req, res) => {
             error: "You need to provide an search adress"
         })
     }
-
+    else{
+        console.log("address found")
+    }
     geoCoding(req.query.address, (error, geoData)=>{
+        console.log("here")
         if(error){
             console.log(error)
+            res.send({
+                error: error
+            })
+
         }else{
          forecast(geoData, (error, {temperature, precip})=>{// instead of data object destructuring it's property
              if(error){
@@ -77,7 +85,7 @@ app.get('/weather', (req, res) => {
 app.get('/help/*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'Tasnim',
         errorMessage: 'Help article not found.'
     })
 })
@@ -85,7 +93,7 @@ app.get('/help/*', (req, res) => {
 app.get('*', (req, res) => {
     res.render('404', {
         title: '404',
-        name: 'Andrew Mead',
+        name: 'Tasnim',
         errorMessage: 'Page not found.'
     })
 })

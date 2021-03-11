@@ -1,3 +1,10 @@
 body {
   background-color: antiquewhite;
 }
+p {
+  padding: 3px;
+}
+
+.form-content {
+  margin: 2px;
+}
