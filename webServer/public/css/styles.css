@@ -40,3 +40,18 @@ header a {
 .portrait {
   width: 250px;
 }
+
+input {
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  padding: 8px;
+}
+p {
+  font-size: 16px;
+}
+button {
+  border: 1px solid #b2f3e6;
+  border-radius: 10px;
+  background-color: #b2f3e6;
+  padding: 8px;
+}
