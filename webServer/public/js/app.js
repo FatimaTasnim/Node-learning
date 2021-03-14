@@ -1,7 +1,7 @@
 console.log('Client side javascript file is loaded!')
 LodingStatus = document.querySelector('#isLoading')
 LocationFetcher = (Location, callback)=>{
-    fullurl = "http://localhost:3000/weather?address=" + Location;
+    fullurl = "/weather?address=" + Location;
     fetch(url = fullurl ).then((response)=>{
         response.json().then((data)=>{
             callback(data);

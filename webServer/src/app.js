@@ -1,10 +1,10 @@
-const path = require('path')
-const express = require('express')
-const hbs = require('hbs')
-const { runInNewContext } = require('vm')
+const path                  = require('path')
+const express               = require('express')
+const hbs                   = require('hbs')
+const { runInNewContext }   = require('vm')
 
-const app = express()
-
+const app   = express()
+const port  = process.env.PORT || 3000
 const request = require('request');
 const geoCoding = require('../utils/geocode')
 const forecast = require('../utils/forecast')
@@ -98,6 +98,6 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server is up on port 3000.')
 })
